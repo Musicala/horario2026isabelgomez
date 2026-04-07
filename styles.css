@@ -1,0 +1,1168 @@
+/* =========================
+   VARIABLES
+========================= */
+:root{
+  --bg: #f3f6fb;
+  --bg-soft: #f8faff;
+  --card: rgba(255,255,255,.92);
+  --card-solid: #ffffff;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  --text: #0f172a;
+  --muted: #64748b;
+  --muted-2: #475569;
+
+  --primary: #6c7cff;
+  --primary-2: #8b5cf6;
+  --primary-3: #4338ca;
+  --primary-soft: #e9edff;
+  --primary-soft-2: #c7d2fe;
+  --primary-ring: rgba(108,124,255,.18);
+
+  --success-soft: #ecfeff;
+  --surface: #f8fafc;
+  --surface-2: #eef2f7;
+  --surface-3: #f1f5f9;
+
+  --radius-xl: 24px;
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --radius-xs: 10px;
+  --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(15,23,42,.04);
+  --shadow-sm: 0 8px 24px rgba(15,23,42,.05);
+  --shadow: 0 16px 40px rgba(15,23,42,.07);
+  --shadow-lg: 0 20px 50px rgba(76,92,180,.12);
+  --shadow-card: 0 14px 36px rgba(15,23,42,.07);
+
+  --wrap-max: 1200px;
+  --tap: 44px;
+}
+
+/* =========================
+   RESET
+========================= */
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
+html{
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+html, body{
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(139,92,246,.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(108,124,255,.08), transparent 28%),
+    linear-gradient(180deg, #f7f9ff 0%, var(--bg) 100%);
+  color: var(--text);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Ubuntu,
+    sans-serif;
+}
+
+body{
+  min-height: 100vh;
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas{
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea{
+  font: inherit;
+}
+
+button{
+  color: inherit;
+}
+
+a{
+  color: inherit;
+}
+
+:focus-visible{
+  outline: 3px solid rgba(108,124,255,.20);
+  outline-offset: 2px;
+}
+
+::selection{
+  background: rgba(108,124,255,.18);
+  color: var(--text);
+}
+
+/* =========================
+   BASE HELPERS
+========================= */
+code{
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: .12rem .38rem;
+  font-size: .92em;
+}
+
+.srOnly{
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.wrap{
+  width: min(100%, var(--wrap-max));
+  margin: 0 auto;
+  padding:
+    20px
+    max(16px, env(safe-area-inset-right, 0px))
+    64px
+    max(16px, env(safe-area-inset-left, 0px));
+}
+
+/* =========================
+   HEADER
+========================= */
+.top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.topMain{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.logoDot{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  box-shadow:
+    0 0 0 5px rgba(108,124,255,.10),
+    0 10px 25px rgba(108,124,255,.35);
+}
+
+.brandTitle{
+  font-weight: 1000;
+  font-size: 1.18rem;
+  letter-spacing: .01em;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.brandSub{
+  font-size: .9rem;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.35;
+}
+
+.monthNav{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.monthLabel{
+  min-width: 170px;
+  padding: 0 8px;
+  text-align: center;
+  font-weight: 1000;
+  font-size: 1rem;
+  letter-spacing: .01em;
+  color: var(--text);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn{
+  appearance: none;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.94);
+  border-radius: var(--radius-pill);
+  min-height: var(--tap);
+  padding: 9px 15px;
+  font-weight: 900;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform .08s ease,
+    background .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease,
+    color .18s ease,
+    opacity .18s ease;
+  box-shadow: var(--shadow-xs);
+}
+
+.btn:hover{
+  background: #ffffff;
+  border-color: rgba(148,163,184,.60);
+  box-shadow: 0 8px 20px rgba(15,23,42,.05);
+}
+
+.btn:active{
+  transform: translateY(1px) scale(.995);
+}
+
+.btn:focus-visible{
+  border-color: rgba(108,124,255,.45);
+  box-shadow: 0 0 0 4px rgba(108,124,255,.14);
+}
+
+.btn:disabled{
+  cursor: not-allowed;
+  opacity: .6;
+  box-shadow: none;
+}
+
+.actions{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* =========================
+   TOOLBAR / TABS
+========================= */
+.plannerToolbar{
+  display: grid;
+  gap: 14px;
+  margin: 4px 0 18px;
+}
+
+.tabsScroller{
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.tabsScroller::-webkit-scrollbar{
+  display: none;
+}
+
+.tabsRow{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  min-width: max-content;
+}
+
+.tabsLeft{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: nowrap;
+  min-width: max-content;
+}
+
+.tabBtn{
+  appearance: none;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.95);
+  border-radius: var(--radius-pill);
+  min-height: var(--tap);
+  padding: 10px 14px;
+  font-weight: 950;
+  cursor: pointer;
+  transition:
+    transform .08s ease,
+    background .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease,
+    color .15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  user-select: none;
+  flex: 0 0 auto;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: var(--shadow-xs);
+}
+
+.tabBtn:hover{
+  background: #ffffff;
+  border-color: rgba(148,163,184,.55);
+  box-shadow: 0 8px 18px rgba(15,23,42,.05);
+}
+
+.tabBtn:active{
+  transform: translateY(1px);
+}
+
+.tabBtn:focus-visible{
+  border-color: rgba(108,124,255,.38);
+  box-shadow: 0 0 0 4px rgba(108,124,255,.12);
+}
+
+.tabBtn.isActive{
+  background: linear-gradient(180deg, #f2f5ff, #e9edff);
+  border-color: rgba(108,124,255,.28);
+  color: #3730a3;
+  box-shadow: 0 14px 30px rgba(108,124,255,.10);
+}
+
+.panel{
+  display: block;
+}
+
+.panel.isHidden{
+  display: none;
+}
+
+.legendNote{
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  flex: 1 1 260px;
+  min-width: 240px;
+}
+
+.legendHelp{
+  font-size: .83rem;
+  color: var(--muted);
+  line-height: 1.4;
+  max-width: 440px;
+  text-align: right;
+}
+
+/* =========================
+   CARDS
+========================= */
+.card{
+  background: var(--card);
+  border: 1px solid rgba(226,232,240,.96);
+  border-radius: var(--radius-xl);
+  padding: 18px 18px 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.card__head{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.card__head > div:first-child{
+  min-width: 0;
+  flex: 1 1 260px;
+}
+
+.card h2{
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 1000;
+  letter-spacing: .01em;
+  line-height: 1.15;
+}
+
+.sub{
+  font-size: .89rem;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+/* =========================
+   CHIPS / LEGEND
+========================= */
+.legend{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  border-radius: var(--radius-pill);
+  padding: 6px 12px;
+  font-size: .78rem;
+  font-weight: 950;
+  background: #f1f5f9;
+  color: var(--muted-2);
+  border: 1px solid rgba(0,0,0,.05);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.chip--on{
+  background: #eef2ff;
+  color: #3730a3;
+  border-color: rgba(108,124,255,.22);
+}
+
+/* =========================
+   SCROLLERS
+========================= */
+.calendarScroller,
+.weekChartScroller{
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148,163,184,.40) transparent;
+}
+
+.calendarScroller::-webkit-scrollbar,
+.weekChartScroller::-webkit-scrollbar{
+  height: 10px;
+}
+
+.calendarScroller::-webkit-scrollbar-thumb,
+.weekChartScroller::-webkit-scrollbar-thumb{
+  background: rgba(148,163,184,.35);
+  border-radius: 999px;
+}
+
+.calendarScroller::-webkit-scrollbar-track,
+.weekChartScroller::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+/* =========================
+   CALENDAR
+========================= */
+.calendar{
+  margin-top: 8px;
+  min-width: 680px;
+}
+
+.calendarHead{
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.calDay{
+  text-align: center;
+  font-weight: 950;
+  font-size: .82rem;
+  color: var(--muted);
+  letter-spacing: .01em;
+}
+
+.calendarGrid{
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.calCell{
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 10px 9px;
+  min-height: 102px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: .79rem;
+  background: #fff;
+  transition:
+    border-color .15s ease,
+    background .15s ease,
+    box-shadow .15s ease,
+    transform .15s ease;
+  box-shadow: 0 2px 8px rgba(15,23,42,.03);
+}
+
+.calCell:hover{
+  border-color: rgba(108,124,255,.18);
+  box-shadow: 0 10px 24px rgba(15,23,42,.05);
+}
+
+.calCell.off{
+  background: #f8fafc;
+  color: rgba(100,116,139,.44);
+  border-color: rgba(226,232,240,.9);
+  box-shadow: none;
+}
+
+.calCell.on{
+  border-color: rgba(108,124,255,.32);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.18)),
+    var(--primary-soft);
+}
+
+.calDate{
+  font-weight: 1000;
+  font-size: .96rem;
+  line-height: 1;
+  color: var(--text);
+}
+
+.calCell.off .calDate{
+  color: rgba(100,116,139,.55);
+}
+
+.calHours{
+  font-weight: 950;
+  color: var(--primary-3);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.calCell.off .calHours{
+  color: rgba(100,116,139,.52);
+}
+
+/* =========================
+   WEEK CHART
+========================= */
+.weekChart{
+  display: grid;
+  grid-template-columns: repeat(7, minmax(68px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+  min-width: 620px;
+  align-items: end;
+}
+
+.dayBar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.bar{
+  width: 100%;
+  height: 132px;
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.05)),
+    #eef2f7;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(15,23,42,.05);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+.barFill{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0%;
+  background: linear-gradient(180deg, #9aa6ff, var(--primary));
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28);
+  transition: height .25s ease;
+}
+
+.dayName{
+  font-weight: 1000;
+  font-size: .9rem;
+  color: var(--text);
+}
+
+.dayHours{
+  font-size: .82rem;
+  font-weight: 950;
+  color: var(--muted);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   TOTALS
+========================= */
+.totalsGrid{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.totalsBox{
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.68), rgba(255,255,255,.18)),
+    var(--surface);
+  padding: 15px;
+  box-shadow: var(--shadow-xs);
+  min-width: 0;
+}
+
+.totalsTitle{
+  font-weight: 1000;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.totalsList{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: .92rem;
+}
+
+.totalsRow{
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-weight: 950;
+  color: rgba(71,85,105,.96);
+}
+
+.totalsRow > :first-child{
+  color: var(--muted-2);
+  min-width: 0;
+}
+
+.totalsRow > :last-child{
+  color: var(--text);
+  text-align: right;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   KPI
+========================= */
+.kpiGrid{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.kpi{
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.68), rgba(255,255,255,.18)),
+    var(--surface);
+  padding: 15px;
+  box-shadow: var(--shadow-xs);
+  min-width: 0;
+}
+
+.kpiLabel{
+  font-size: .74rem;
+  font-weight: 1000;
+  color: rgba(100,116,139,.96);
+  text-transform: uppercase;
+  letter-spacing: .045em;
+  line-height: 1.35;
+}
+
+.kpiValue{
+  margin-top: 8px;
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 1000;
+  color: var(--primary-3);
+  letter-spacing: .01em;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.kpiHint{
+  margin-top: 6px;
+  font-size: .79rem;
+  color: var(--muted);
+  line-height: 1.38;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   LUNCH DAYS LIST
+========================= */
+.lunchDaysList{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+.lunchDaysList .chip{
+  background: #eef2ff;
+  border-color: rgba(108,124,255,.22);
+  color: #3730a3;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.foot{
+  margin-top: 30px;
+  text-align: center;
+  font-size: .86rem;
+  color: var(--muted);
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+}
+
+/* =========================
+   LARGE / MID
+========================= */
+@media (max-width: 1080px){
+  .wrap{
+    padding-top: 18px;
+  }
+
+  .kpiGrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .weekChart{
+    gap: 12px;
+  }
+}
+
+@media (max-width: 980px){
+  .tabsRow{
+    flex-direction: column;
+    align-items: stretch;
+    min-width: unset;
+  }
+
+  .legendNote{
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .legendHelp{
+    max-width: none;
+    text-align: left;
+  }
+
+  .card{
+    padding: 17px 16px 18px;
+  }
+
+  .monthLabel{
+    min-width: 150px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 720px){
+  :root{
+    --tap: 44px;
+    --radius-xl: 22px;
+    --radius-lg: 18px;
+    --radius-md: 14px;
+  }
+
+  .wrap{
+    padding:
+      14px
+      max(12px, env(safe-area-inset-right, 0px))
+      48px
+      max(12px, env(safe-area-inset-left, 0px));
+  }
+
+  .top{
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .topMain{
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .brand{
+    align-items: flex-start;
+    flex: 1 1 100%;
+  }
+
+  .logoDot{
+    margin-top: 3px;
+  }
+
+  .brandTitle{
+    font-size: 1.08rem;
+  }
+
+  .brandSub{
+    font-size: .86rem;
+  }
+
+  .monthNav{
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .monthLabel{
+    min-width: 0;
+    flex: 1 1 auto;
+    font-size: .98rem;
+  }
+
+  .plannerToolbar{
+    position: sticky;
+    top: 0;
+    z-index: 15;
+    margin-top: -2px;
+    padding-top: 8px;
+    background:
+      linear-gradient(to bottom, rgba(243,246,251,.97), rgba(243,246,251,.90));
+    backdrop-filter: blur(10px);
+  }
+
+  .tabsScroller{
+    margin-left: -2px;
+    margin-right: -2px;
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .tabsLeft{
+    gap: 7px;
+  }
+
+  .tabBtn{
+    min-height: 44px;
+    padding: 10px 13px;
+    font-size: .95rem;
+  }
+
+  .legendHelp{
+    font-size: .8rem;
+  }
+
+  .card{
+    border-radius: var(--radius-lg);
+    padding: 15px 14px 16px;
+    margin-bottom: 16px;
+  }
+
+  .card__head{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .card h2{
+    font-size: 1.02rem;
+  }
+
+  .sub{
+    font-size: .84rem;
+    line-height: 1.42;
+  }
+
+  .actions{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .actions .btn{
+    width: 100%;
+    min-width: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .legend{
+    width: 100%;
+  }
+
+  .chip{
+    min-height: 30px;
+    padding: 5px 11px;
+    font-size: .76rem;
+  }
+
+  .calendar{
+    min-width: 610px;
+  }
+
+  .calendarHead{
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .calendarGrid{
+    gap: 6px;
+  }
+
+  .calDay{
+    font-size: .8rem;
+  }
+
+  .calCell{
+    min-height: 94px;
+    padding: 9px 8px 8px;
+    gap: 6px;
+    border-radius: 14px;
+  }
+
+  .calDate{
+    font-size: .92rem;
+  }
+
+  .calHours{
+    font-size: .76rem;
+    line-height: 1.22;
+  }
+
+  .weekChart{
+    min-width: 560px;
+    gap: 10px;
+  }
+
+  .bar{
+    height: 108px;
+    border-radius: 14px;
+  }
+
+  .dayName{
+    font-size: .86rem;
+  }
+
+  .dayHours{
+    font-size: .78rem;
+  }
+
+  .totalsGrid{
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .totalsBox{
+    padding: 14px;
+  }
+
+  .totalsTitle{
+    font-size: .98rem;
+    margin-bottom: 10px;
+  }
+
+  .totalsList{
+    gap: 9px;
+    font-size: .89rem;
+  }
+
+  .totalsRow{
+    gap: 10px;
+  }
+
+  .kpiGrid{
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .kpi{
+    padding: 14px;
+  }
+
+  .kpiLabel{
+    font-size: .72rem;
+  }
+
+  .kpiValue{
+    font-size: 1.38rem;
+  }
+
+  .kpiHint{
+    font-size: .78rem;
+  }
+
+  .foot{
+    margin-top: 24px;
+    font-size: .82rem;
+  }
+}
+
+@media (max-width: 520px){
+  .wrap{
+    padding-left: max(10px, env(safe-area-inset-left, 0px));
+    padding-right: max(10px, env(safe-area-inset-right, 0px));
+  }
+
+  .brandTitle{
+    font-size: 1.03rem;
+  }
+
+  .brandSub{
+    font-size: .83rem;
+  }
+
+  .btn{
+    min-height: 42px;
+    padding: 8px 13px;
+  }
+
+  .tabBtn{
+    font-size: .92rem;
+    padding: 9px 12px;
+  }
+
+  .card{
+    padding: 14px 12px 15px;
+  }
+
+  .sub{
+    font-size: .82rem;
+  }
+
+  .calendar{
+    min-width: 590px;
+  }
+
+  .calCell{
+    min-height: 90px;
+    padding: 8px 8px 7px;
+  }
+
+  .calDate{
+    font-size: .9rem;
+  }
+
+  .calHours{
+    font-size: .74rem;
+  }
+
+  .weekChart{
+    min-width: 520px;
+  }
+
+  .bar{
+    height: 100px;
+  }
+
+  .kpiValue{
+    font-size: 1.32rem;
+  }
+}
+
+@media (max-width: 390px){
+  .wrap{
+    padding-left: max(8px, env(safe-area-inset-left, 0px));
+    padding-right: max(8px, env(safe-area-inset-right, 0px));
+  }
+
+  .monthNav{
+    gap: 8px;
+  }
+
+  .btn{
+    padding: 8px 11px;
+  }
+
+  .card{
+    padding: 13px 11px 14px;
+    border-radius: 16px;
+  }
+
+  .calendar{
+    min-width: 575px;
+  }
+
+  .weekChart{
+    min-width: 500px;
+  }
+
+  .chip{
+    font-size: .74rem;
+  }
+}
+
+/* =========================
+   ACCESSIBILITY / MOTION
+========================= */
+@media (prefers-reduced-motion: reduce){
+  html{
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation: none !important;
+    transition: none !important;
+  }
+}
